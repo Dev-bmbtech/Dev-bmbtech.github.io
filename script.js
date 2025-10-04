@@ -1,10 +1,19 @@
 const chatBox = document.getElementById("chat-box");
 const userInput = document.getElementById("user-input");
 const sendBtn = document.getElementById("send-btn");
+const menuBtn = document.getElementById("menu-btn");
+const sidebar = document.getElementById("sidebar");
+const historyList = document.getElementById("history-list");
+const newChatBtn = document.getElementById("new-chat-btn");
+const searchInput = document.getElementById("search-input");
 
-// Hifadhi chat history
-let chats = JSON.parse(localStorage.getItem("chats")) || [];
-chats.forEach(msg => addMessage(msg.text, msg.sender));
+// Multiple chat sessions
+let sessions = JSON.parse(localStorage.getItem("sessions")) || [];
+let currentSession = { id: Date.now(), messages: [] };
+
+// On load
+renderHistory();
+loadSession(currentSession);
 
 function addMessage(text, sender) {
   const msgDiv = document.createElement("div");
@@ -13,26 +22,52 @@ function addMessage(text, sender) {
   chatBox.appendChild(msgDiv);
   chatBox.scrollTop = chatBox.scrollHeight;
 
-  // Save message
-  chats.push({ text, sender });
-  localStorage.setItem("chats", JSON.stringify(chats));
+  currentSession.messages.push({ text, sender });
+  saveSessions();
 }
 
-// === Custom identity check ===
+function saveSessions() {
+  const index = sessions.findIndex(s => s.id === currentSession.id);
+  if (index >= 0) {
+    sessions[index] = currentSession;
+  } else {
+    sessions.push(currentSession);
+  }
+  localStorage.setItem("sessions", JSON.stringify(sessions));
+  renderHistory();
+}
+
+function renderHistory() {
+  historyList.innerHTML = "";
+  sessions.forEach(session => {
+    const li = document.createElement("li");
+    li.textContent = session.messages[0]?.text?.slice(0, 30) || "New chat";
+    li.onclick = () => {
+      loadSession(session);
+    };
+    historyList.appendChild(li);
+  });
+}
+
+function loadSession(session) {
+  currentSession = session;
+  chatBox.innerHTML = "";
+  session.messages.forEach(m => addMessage(m.text, m.sender));
+}
+
+// === Identity Check ===
 function checkIdentity(question) {
   const q = question.toLowerCase();
 
-  // Kiswahili
   if (q.includes("unaitwa nani") || q.includes("jina lako nani") || q.includes("wewe nani")) {
     return "Ninaitwa B.M.B TECH 🤖";
   }
 
-  // English
   if (q.includes("what is your name") || q.includes("who are you") || q.includes("your name")) {
     return "My name is B.M.B TECH 🤖";
   }
 
-  return null; // sio swali la jina
+  return null;
 }
 
 async function fetchFromAPIs(query) {
@@ -55,7 +90,7 @@ async function fetchFromAPIs(query) {
     }
   }
 
-  return "⚠️ Samahani, hakuna jibu lililopatikana kwa sasa.";
+  return "⚠️ Hakuna jibu lililopatikana kwa sasa.";
 }
 
 async function sendMessage() {
@@ -65,7 +100,6 @@ async function sendMessage() {
   addMessage(text, "user");
   userInput.value = "";
 
-  // Cheki kama ni swali la jina
   const identityAnswer = checkIdentity(text);
   if (identityAnswer) {
     addMessage(identityAnswer, "bot");
@@ -76,7 +110,6 @@ async function sendMessage() {
 
   const reply = await fetchFromAPIs(text);
 
-  // Ondoa message ya loading
   let loadingMsg = document.querySelector(".bot:last-child");
   if (loadingMsg && loadingMsg.textContent === "⏳ Inatafuta jibu...") {
     loadingMsg.remove();
@@ -85,7 +118,33 @@ async function sendMessage() {
   addMessage(reply, "bot");
 }
 
+// === Controls ===
 sendBtn.addEventListener("click", sendMessage);
 userInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") sendMessage();
+});
+
+menuBtn.addEventListener("click", () => {
+  sidebar.classList.toggle("active");
+});
+
+newChatBtn.addEventListener("click", () => {
+  currentSession = { id: Date.now(), messages: [] };
+  chatBox.innerHTML = "";
+  saveSessions();
+});
+
+searchInput.addEventListener("input", () => {
+  const keyword = searchInput.value.toLowerCase();
+  const filtered = sessions.filter(session =>
+    session.messages.some(m => m.text.toLowerCase().includes(keyword))
+  );
+
+  historyList.innerHTML = "";
+  filtered.forEach(session => {
+    const li = document.createElement("li");
+    li.textContent = session.messages[0]?.text?.slice(0, 30) || "New chat";
+    li.onclick = () => loadSession(session);
+    historyList.appendChild(li);
+  });
 });
