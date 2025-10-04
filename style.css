@@ -6,39 +6,95 @@
 }
 
 body {
-  background: linear-gradient(135deg, #000814, #001d3d, #003566);
+  background: #000814;
   color: #fff;
   height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
+.app-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+/* ===== Sidebar ===== */
+aside {
+  width: 250px;
+  background: #001d3d;
+  border-right: 1px solid #003566;
+  display: none; /* hidden by default */
+  flex-direction: column;
+}
+
+aside.active {
+  display: flex;
+}
+
+.sidebar-header {
+  padding: 10px;
+  border-bottom: 1px solid #003566;
+}
+
+#search-input {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+}
+
+#history-list {
+  list-style: none;
+  flex: 1;
+  overflow-y: auto;
+}
+
+#history-list li {
+  padding: 10px;
+  border-bottom: 1px solid #003566;
+  cursor: pointer;
+}
+
+#history-list li:hover {
+  background: #003566;
+}
+
+/* ===== Chat Section ===== */
 .chat-container {
-  width: 90%;
-  max-width: 600px;
-  height: 90vh;
-  background: rgba(0, 0, 0, 0.7);
-  border-radius: 15px;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  box-shadow: 0 0 25px rgba(0, 150, 255, 0.6);
 }
 
 header {
-  padding: 15px;
-  text-align: center;
-  background: rgba(0, 50, 100, 0.9);
-  border-bottom: 1px solid #00f2fe;
+  padding: 10px;
+  background: #003566;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 header h1 {
+  font-size: 18px;
   color: #00f2fe;
-  font-size: 20px;
-  letter-spacing: 2px;
 }
 
+header button {
+  background: #00f2fe;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+header button:hover {
+  background: #0077b6;
+  color: #fff;
+}
+
+/* ===== Messages ===== */
 main {
   flex: 1;
   padding: 15px;
@@ -47,7 +103,6 @@ main {
   flex-direction: column;
 }
 
-/* ===== Messages ===== */
 .message {
   margin: 8px 0;
   padding: 10px 15px;
@@ -56,7 +111,6 @@ main {
   word-wrap: break-word;
 }
 
-/* User message (right side) */
 .user {
   background: #0077b6;
   align-self: flex-end;
@@ -65,7 +119,6 @@ main {
   color: #fff;
 }
 
-/* Bot message (left side) */
 .bot {
   background: #001d3d;
   align-self: flex-start;
