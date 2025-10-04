@@ -41,33 +41,12 @@ function renderHistory() {
   historyList.innerHTML = "";
   sessions.forEach(session => {
     const li = document.createElement("li");
-    li.className = "session-item";
     li.textContent = session.messages[0]?.text?.slice(0, 30) || "New chat";
-
-    // Delete button: mistari mitatu + neno Delete
-    const deleteBtn = document.createElement("span");
-    deleteBtn.className = "delete-btn";
-    deleteBtn.innerHTML = "⋮⋮⋮ <span class='delete-text'>Delete</span>";
-    deleteBtn.onclick = (e) => {
-      e.stopPropagation();
-      if (confirm("Delete this chat?")) {
-        deleteSession(session.id);
-      }
+    li.onclick = () => {
+      loadSession(session);
     };
-
-    li.appendChild(deleteBtn);
-    li.onclick = () => loadSession(session);
     historyList.appendChild(li);
   });
-}
-
-function deleteSession(id) {
-  sessions = sessions.filter(s => s.id !== id);
-  if (currentSession.id === id) {
-    currentSession = { id: Date.now(), messages: [] };
-    loadSession(currentSession);
-  }
-  saveSessions();
 }
 
 function loadSession(session) {
@@ -164,20 +143,7 @@ searchInput.addEventListener("input", () => {
   historyList.innerHTML = "";
   filtered.forEach(session => {
     const li = document.createElement("li");
-    li.className = "session-item";
     li.textContent = session.messages[0]?.text?.slice(0, 30) || "New chat";
-
-    const deleteBtn = document.createElement("span");
-    deleteBtn.className = "delete-btn";
-    deleteBtn.innerHTML = "⋮⋮⋮ <span class='delete-text'>Delete</span>";
-    deleteBtn.onclick = (e) => {
-      e.stopPropagation();
-      if (confirm("Delete this chat?")) {
-        deleteSession(session.id);
-      }
-    };
-
-    li.appendChild(deleteBtn);
     li.onclick = () => loadSession(session);
     historyList.appendChild(li);
   });
