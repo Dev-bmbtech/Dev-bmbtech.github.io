@@ -167,7 +167,6 @@ searchInput.addEventListener("input", () => {
     li.className = "session-item";
     li.textContent = session.messages[0]?.text?.slice(0, 30) || "New chat";
 
-    // Delete button pia kwenye filtered
     const deleteBtn = document.createElement("span");
     deleteBtn.className = "delete-btn";
     deleteBtn.innerHTML = "⋮⋮⋮ <span class='delete-text'>Delete</span>";
