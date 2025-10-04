@@ -1,9 +1,8 @@
 const chatBox = document.getElementById("chat-box");
 const userInput = document.getElementById("user-input");
 const sendBtn = document.getElementById("send-btn");
-const imgBtn = document.getElementById("img-btn");
 
-// Load old chats from localStorage
+// Hifadhi chat history
 let chats = JSON.parse(localStorage.getItem("chats")) || [];
 chats.forEach(msg => addMessage(msg.text, msg.sender));
 
@@ -19,6 +18,46 @@ function addMessage(text, sender) {
   localStorage.setItem("chats", JSON.stringify(chats));
 }
 
+// === Custom identity check ===
+function checkIdentity(question) {
+  const q = question.toLowerCase();
+
+  // Kiswahili
+  if (q.includes("unaitwa nani") || q.includes("jina lako nani") || q.includes("wewe nani")) {
+    return "Ninaitwa B.M.B TECH 🤖";
+  }
+
+  // English
+  if (q.includes("what is your name") || q.includes("who are you") || q.includes("your name")) {
+    return "My name is B.M.B TECH 🤖";
+  }
+
+  return null; // sio swali la jina
+}
+
+async function fetchFromAPIs(query) {
+  const apis = [
+    `https://api.giftedtech.web.id/api/ai/ai?apikey=gifted&q=${encodeURIComponent(query)}`,
+    `https://api.giftedtech.web.id/api/ai/chat?apikey=gifted&q=${encodeURIComponent(query)}`,
+    `https://api.giftedtech.web.id/api/ai/gpt?apikey=gifted&q=${encodeURIComponent(query)}`
+  ];
+
+  for (let url of apis) {
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+
+      if (data && data.result) {
+        return data.result;
+      }
+    } catch (err) {
+      console.log("API error:", err);
+    }
+  }
+
+  return "⚠️ Samahani, hakuna jibu lililopatikana kwa sasa.";
+}
+
 async function sendMessage() {
   const text = userInput.value.trim();
   if (!text) return;
@@ -26,45 +65,27 @@ async function sendMessage() {
   addMessage(text, "user");
   userInput.value = "";
 
-  // Call AI API (replace URL & key with your API)
-  try {
-    const res = await fetch("YOUR_AI_API_ENDPOINT", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Authorization": "Bearer YOUR_API_KEY" },
-      body: JSON.stringify({ prompt: text })
-    });
-    const data = await res.json();
-    addMessage(data.reply || "⚠️ No response", "bot");
-  } catch (err) {
-    addMessage("❌ Error connecting to AI", "bot");
+  // Cheki kama ni swali la jina
+  const identityAnswer = checkIdentity(text);
+  if (identityAnswer) {
+    addMessage(identityAnswer, "bot");
+    return;
   }
-}
 
-async function generateImage() {
-  const text = prompt("Enter description for image:");
-  if (!text) return;
+  addMessage("⏳ Inatafuta jibu...", "bot");
 
-  try {
-    const res = await fetch("YOUR_IMAGE_API_ENDPOINT", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Authorization": "Bearer YOUR_API_KEY" },
-      body: JSON.stringify({ prompt: text })
-    });
-    const data = await res.json();
+  const reply = await fetchFromAPIs(text);
 
-    const img = document.createElement("img");
-    img.src = data.url || "";
-    img.style.maxWidth = "100%";
-    img.style.borderRadius = "10px";
-    chatBox.appendChild(img);
-    chatBox.scrollTop = chatBox.scrollHeight;
-  } catch (err) {
-    addMessage("❌ Error generating image", "bot");
+  // Ondoa message ya loading
+  let loadingMsg = document.querySelector(".bot:last-child");
+  if (loadingMsg && loadingMsg.textContent === "⏳ Inatafuta jibu...") {
+    loadingMsg.remove();
   }
+
+  addMessage(reply, "bot");
 }
 
 sendBtn.addEventListener("click", sendMessage);
-imgBtn.addEventListener("click", generateImage);
 userInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") sendMessage();
 });
