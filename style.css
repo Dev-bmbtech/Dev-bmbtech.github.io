@@ -43,26 +43,38 @@ main {
   flex: 1;
   padding: 15px;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
+/* ===== Messages ===== */
 .message {
-  margin-bottom: 15px;
-  padding: 10px;
-  border-radius: 10px;
-  max-width: 80%;
+  margin: 8px 0;
+  padding: 10px 15px;
+  border-radius: 12px;
+  max-width: 70%;
+  word-wrap: break-word;
 }
 
+/* User message (right side) */
 .user {
-  background: #003566;
+  background: #0077b6;
   align-self: flex-end;
   text-align: right;
+  border-bottom-right-radius: 2px;
+  color: #fff;
 }
 
+/* Bot message (left side) */
 .bot {
   background: #001d3d;
   align-self: flex-start;
+  text-align: left;
+  border-bottom-left-radius: 2px;
+  color: #f1f1f1;
 }
 
+/* ===== Footer ===== */
 footer {
   display: flex;
   padding: 10px;
