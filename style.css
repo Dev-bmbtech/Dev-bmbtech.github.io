@@ -127,24 +127,30 @@ main {
   color: #f1f1f1;
 }
 
-/* ===== Chat Input Section ===== */
+/* ===== Chat Input Section (Centered, Wide, Short) ===== */
 .chat-input {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 15px;
+  padding: 8px 15px;
   background: rgba(0, 50, 100, 0.95);
   border-radius: 12px;
-  margin: 15px;  /* Inapandisha juu kidogo kutoka chini */
+  
+  width: 70%;               /* inachukua 70% ya width ya chat-container */
+  max-width: 800px;         /* max width */
+  
+  height: 45px;             /* urefu mdogo */
+  margin: 20px auto;        /* katikati ya screen horizontally na juu kidogo */
 }
 
 .chat-input input {
   flex: 1;
-  padding: 14px;  /* Inapana zaidi */
+  height: 30px;             /* urefu mdogo zaidi ndani ya box */
+  padding: 5px 10px;
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
   outline: none;
-  font-size: 16px;
+  font-size: 15px;
   background: #001d3d;
   color: #fff;
 }
@@ -154,9 +160,9 @@ main {
 }
 
 .chat-input button {
-  padding: 14px 20px;
+  padding: 8px 16px;
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
   background: #00f2fe;
   color: #000;
   font-weight: bold;
