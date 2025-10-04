@@ -8,12 +8,16 @@
 </head>
 <body>
   <div class="app-container">
+    
     <!-- Sidebar -->
     <aside id="sidebar">
       <div class="sidebar-header">
         <input type="text" id="search-input" placeholder="Search chats...">
-        <button id="new-chat-btn" class="new-chat-inside">＋ New Chat</button>
       </div>
+      
+      <!-- New Chat button sasa iko hapa ndani ya sidebar -->
+      <button id="new-chat-btn" class="sidebar-new-chat">＋ New Chat</button>
+
       <ul id="history-list"></ul>
     </aside>
 
@@ -22,13 +26,19 @@
       <header>
         <button id="menu-btn">☰</button>
         <h1>B.M.B TECH AI</h1>
+        <!-- New Chat imeondolewa hapa -->
       </header>
-      <div class="input-area">
-        <input type="text" id="user-input" placeholder="Type your message..." autocomplete="off" />
+
+      <!-- Messages -->
+      <main id="chat-box"></main>
+
+      <!-- Chat Input -->
+      <div class="chat-input">
+        <input type="text" id="user-input" placeholder="Type your message..." />
         <button id="send-btn">Send</button>
       </div>
-      <main id="chat-box"></main>
     </div>
+
   </div>
   <script src="script.js"></script>
 </body>
