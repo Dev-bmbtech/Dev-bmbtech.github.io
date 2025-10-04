@@ -23,7 +23,7 @@ aside {
   width: 250px;
   background: #001d3d;
   border-right: 1px solid #003566;
-  display: none;
+  display: none; /* hidden by default */
   flex-direction: column;
 }
 
@@ -34,9 +34,6 @@ aside.active {
 .sidebar-header {
   padding: 10px;
   border-bottom: 1px solid #003566;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
 }
 
 #search-input {
@@ -47,67 +44,40 @@ aside.active {
   outline: none;
 }
 
-#new-chat-btn {
-  margin-top: 6px;
-  padding: 8px 0;
-  background: #00f2fe;
-  color: #001d3d;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s;
-}
-#new-chat-btn:hover {
-  background: #0077b6;
-  color: #fff;
-}
-
 #history-list {
   list-style: none;
   flex: 1;
   overflow-y: auto;
-  padding: 0;
-  margin: 0;
 }
 
-.session-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 8px;
+/* Sidebar New Chat Button */
+.sidebar-new-chat {
+  width: 90%;
+  margin: 10px auto;
+  padding: 10px;
+  background: #00f2fe;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar-new-chat:hover {
+  background: #0077b6;
+  color: #fff;
+}
+
+#history-list li {
+  padding: 10px;
   border-bottom: 1px solid #003566;
   cursor: pointer;
-  transition: background 0.2s;
-  gap: 8px;
 }
 
-.session-item:hover {
+#history-list li:hover {
   background: #003566;
-}
-
-.delete-btn {
-  display: flex;
-  align-items: center;
-  color: #ff6262;
-  margin-left: 8px;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: bold;
-  user-select: none;
-  gap: 3px;
-  padding: 3px 6px;
-  border-radius: 4px;
-  transition: background 0.2s;
-}
-
-.delete-btn:hover {
-  background: #222;
-}
-
-.delete-text {
-  font-size: 11px;
-  margin-left: 4px;
 }
 
 /* ===== Chat Section ===== */
@@ -115,7 +85,6 @@ aside.active {
   flex: 1;
   display: flex;
   flex-direction: column;
-  height: 100vh;
 }
 
 header {
@@ -141,40 +110,6 @@ header button {
 }
 
 header button:hover {
-  background: #0077b6;
-  color: #fff;
-}
-
-/* ===== Input Area (Above Chat Messages) ===== */
-.input-area {
-  display: flex;
-  padding: 14px 10px 6px 10px;
-  background: rgba(0, 50, 100, 0.9);
-  z-index: 1;
-  position: relative;
-  gap: 8px;
-}
-
-.input-area input {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  border-radius: 10px;
-  outline: none;
-}
-
-.input-area button {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 10px;
-  background: #00f2fe;
-  color: #000;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.input-area button:hover {
   background: #0077b6;
   color: #fff;
 }
@@ -212,7 +147,50 @@ main {
   color: #f1f1f1;
 }
 
-/* ===== Hide Old Footer ===== */
-footer {
-  display: none;
+/* ===== Chat Input Section (Centered, Wide, Short) ===== */
+.chat-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 15px;
+  background: rgba(0, 50, 100, 0.95);
+  border-radius: 12px;
+  
+  width: 70%;               /* inachukua 70% ya width ya chat-container */
+  max-width: 800px;         /* max width */
+  
+  height: 45px;             /* urefu mdogo */
+  margin: 20px auto;        /* katikati ya screen horizontally na juu kidogo */
+}
+
+.chat-input input {
+  flex: 1;
+  height: 30px;             /* urefu mdogo zaidi ndani ya box */
+  padding: 5px 10px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  font-size: 15px;
+  background: #001d3d;
+  color: #fff;
+}
+
+.chat-input input::placeholder {
+  color: #aaa;
+}
+
+.chat-input button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #00f2fe;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.chat-input button:hover {
+  background: #0077b6;
+  color: #fff;
 }
