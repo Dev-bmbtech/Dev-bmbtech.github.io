@@ -23,7 +23,7 @@ aside {
   width: 250px;
   background: #001d3d;
   border-right: 1px solid #003566;
-  display: none; /* hidden by default */
+  display: none;
   flex-direction: column;
 }
 
