@@ -7,16 +7,31 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="chat-container">
-    <header>
-      <h1>B.M.B TECH AI</h1>
-    </header>
-    <main id="chat-box"></main>
-    <footer>
-      <input type="text" id="user-input" placeholder="Type your message..." />
-      <button id="send-btn">Send</button>
-    </footer>
+  <div class="app-container">
+    
+    <!-- Sidebar -->
+    <aside id="sidebar">
+      <div class="sidebar-header">
+        <input type="text" id="search-input" placeholder="Search chats...">
+      </div>
+      <ul id="history-list"></ul>
+    </aside>
+
+    <!-- Chat Section -->
+    <div class="chat-container">
+      <header>
+        <button id="menu-btn">☰</button>
+        <h1>B.M.B TECH AI</h1>
+        <button id="new-chat-btn">＋ New Chat</button>
+      </header>
+      <main id="chat-box"></main>
+      <footer>
+        <input type="text" id="user-input" placeholder="Type your message..." />
+        <button id="send-btn">Send</button>
+      </footer>
+    </div>
+
   </div>
   <script src="script.js"></script>
 </body>
-</html>
+  </html>
