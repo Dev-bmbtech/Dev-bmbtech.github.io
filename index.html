@@ -1,57 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BWM XMD X7 AI</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B.M.B TECH AI</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- HEADER -->
-  <header class="header">
-    <div class="menu-icon">☰</div>
-    <h1 class="title"><span>BWM XMD X7</span> AI</h1>
-  </header>
-
-  <!-- MAIN CONTENT -->
-  <main class="main-content">
-    <div class="bot-logo">
-      <img src="https://cdn-icons-png.flaticon.com/512/4712/4712104.png" alt="bot-logo">
-    </div>
-
-    <h2 class="welcome-text">Welcome to BWMXMD X7</h2>
-    <p class="sub-text">
-      Your advanced AI assistant powered by bwm xmd | Ibrahim Adams<br />
-      Start a conversation by typing a message below.
-    </p>
-
-    <!-- FEATURE CARDS -->
-    <div class="cards">
-      <div class="card">
-        <div class="icon">💎</div>
-        <h3>Ask Questions</h3>
-        <p>Get intelligent responses from various AI models</p>
+  <div class="app-container">
+    
+    <!-- Sidebar -->
+    <aside id="sidebar">
+      <div class="sidebar-header">
+        <input type="text" id="search-input" placeholder="Search chats...">
       </div>
-      <div class="card">
-        <div class="icon">🎨</div>
-        <h3>Generate Images</h3>
-        <p>Start with "create image" e.g. create image of a cat</p>
-      </div>
-      <div class="card">
-        <div class="icon">🎵</div>
-        <h3>Download Audio</h3>
-        <p>Start with "play" e.g. play Shape of You</p>
+      
+      <!-- New Chat button sasa iko hapa ndani ya sidebar -->
+      <button id="new-chat-btn" class="sidebar-new-chat">＋ New Chat</button>
+
+      <ul id="history-list"></ul>
+    </aside>
+
+    <!-- Chat Section -->
+    <div class="chat-container">
+      <header>
+        <button id="menu-btn">☰</button>
+        <h1>B.M.B TECH AI</h1>
+        <!-- New Chat imeondolewa hapa -->
+      </header>
+
+      <!-- Messages -->
+      <main id="chat-box"></main>
+
+      <!-- Chat Input -->
+      <div class="chat-input">
+        <input type="text" id="user-input" placeholder="Type your message..." />
+        <button id="send-btn">Send</button>
       </div>
     </div>
-  </main>
 
-  <!-- CHAT BOX -->
-  <footer class="chat-box">
-    <input type="text" id="user-input" placeholder="Ask bwm xmd ai anything" autocomplete="off" />
-    <button id="send-btn">📨</button>
-  </footer>
-
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
