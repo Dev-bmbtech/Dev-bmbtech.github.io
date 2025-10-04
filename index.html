@@ -8,11 +8,11 @@
 </head>
 <body>
   <div class="app-container">
-    
     <!-- Sidebar -->
     <aside id="sidebar">
       <div class="sidebar-header">
         <input type="text" id="search-input" placeholder="Search chats...">
+        <button id="new-chat-btn" class="new-chat-inside">＋ New Chat</button>
       </div>
       <ul id="history-list"></ul>
     </aside>
@@ -22,16 +22,14 @@
       <header>
         <button id="menu-btn">☰</button>
         <h1>B.M.B TECH AI</h1>
-        <button id="new-chat-btn">＋ New Chat</button>
       </header>
-      <main id="chat-box"></main>
-      <footer>
+      <div class="input-area">
         <input type="text" id="user-input" placeholder="Type your message..." />
         <button id="send-btn">Send</button>
-      </footer>
+      </div>
+      <main id="chat-box"></main>
     </div>
-
   </div>
   <script src="script.js"></script>
 </body>
-  </html>
+</html>
