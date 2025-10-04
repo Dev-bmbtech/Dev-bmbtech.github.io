@@ -127,42 +127,26 @@ main {
   color: #f1f1f1;
 }
 
-/* ===== Chat Input Section (Centered, Wide, Short) ===== */
-.chat-input {
+/* ===== Footer ===== */
+footer {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 15px;
-  background: rgba(0, 50, 100, 0.95);
-  border-radius: 12px;
-  
-  width: 70%;               /* inachukua 70% ya width ya chat-container */
-  max-width: 800px;         /* max width */
-  
-  height: 45px;             /* urefu mdogo */
-  margin: 20px auto;        /* katikati ya screen horizontally na juu kidogo */
+  padding: 10px;
+  background: rgba(0, 50, 100, 0.9);
 }
 
-.chat-input input {
+footer input {
   flex: 1;
-  height: 30px;             /* urefu mdogo zaidi ndani ya box */
-  padding: 5px 10px;
+  padding: 10px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   outline: none;
-  font-size: 15px;
-  background: #001d3d;
-  color: #fff;
 }
 
-.chat-input input::placeholder {
-  color: #aaa;
-}
-
-.chat-input button {
-  padding: 8px 16px;
+footer button {
+  margin-left: 10px;
+  padding: 10px 15px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   background: #00f2fe;
   color: #000;
   font-weight: bold;
@@ -170,7 +154,7 @@ main {
   transition: 0.3s;
 }
 
-.chat-input button:hover {
+footer button:hover {
   background: #0077b6;
   color: #fff;
 }
